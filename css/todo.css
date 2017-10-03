@@ -1,0 +1,47 @@
+body {
+    padding: 1em;
+}
+
+.error {
+    color: #900;
+}
+
+.success {
+    color: #090;
+}
+
+.info {
+    width: 1.5em;
+    height: 1.5em;
+    font-size: 0.75em;
+    border-radius: 50%;
+    border-color: #CCC;
+    text-align: center;
+    font-weight: bold;
+    transition: background-color 0.25s ease;
+    font-weight: normal;
+    position: relative;
+}
+
+.info:hover {
+    cursor: pointer;
+    background-color: #bcbcbc;
+}
+
+.info-text {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    transform: translate(100%, -100%);
+    max-width: 0;
+    max-height: 1.5em;
+    opacity: 0;
+    transition: all 0.4s ease;
+}
+
+.info:hover > .info-text {
+    max-width: 220px;
+    max-height: auto;
+    opacity: 1;
+}
+
