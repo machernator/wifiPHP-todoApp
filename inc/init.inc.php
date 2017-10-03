@@ -1,11 +1,20 @@
 <?php
-// Applikation wird über Array konfiguriert
-$appConfig = [
-    'dbUser' => 'root',
-    'dbPassword' => '',
-    'dbHost' => 'localhost',
-    'dbDatabase' => 'todo'
-];
+/*
+    Plaintext Zugangsdaten sollten immer außerhalb der Webroot (hier www)
+    gespeichert werden. Dh. wir haben  app-config/app-config.inc.php im
+    wamp64 Verzeichnis gespeichert. Auf diesen Ordner kann per HTTP nicht
+    zugegriffen werden.
+
+    Inhalt der app-config.inc.php
+
+    $appConfig = [
+        'dbUser' => 'user',
+        'dbPassword' => 'password',
+        'dbHost' => 'host',
+        'dbDatabase' => 'database'
+    ];
+*/
+require_once '../../app-config/app-config.inc.php';
 
 // Zur Datenbank verbinden
 $mysql = mysqli_connect(

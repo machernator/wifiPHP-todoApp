@@ -11,7 +11,6 @@ require_once 'inc/init.inc.php';
     <link rel="stylesheet" href="css/todo.css">
 </head>
 <body>
-    <!-- Jipie, ein Kommentar -->
     <h1>Todo Liste aus MySQL</h1>
     <?php
     $sql = 'SELECT text, active, datum, name, todos_id FROM todos, user where todos.user_id = user.user_id';
