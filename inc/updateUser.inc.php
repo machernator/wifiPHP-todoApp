@@ -67,10 +67,10 @@ if (count($_POST) > 0) {
                 }
                 
                 if (mysqli_query($mysql, $sqlCat)) {
-                    $msg = '<p class="success">Neues Todo erfolgreich angelegt</p>';
+                    $msg = '<p class="success">TODO aktualisiert</p>';
                 }
                 else {
-                    $msg = '<p class="success">Neues Todo erfolgreich angelegt. Kategorien sind fehlerhaft.</p>';
+                    $msg = '<p class="success">Kategorien sind fehlerhaft.</p>';
                 }
             }
         }

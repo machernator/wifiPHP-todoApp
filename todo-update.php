@@ -23,6 +23,7 @@ if (array_key_exists('tid', $_GET) && $_GET['tid'] !== '') {
 </head>
 <body>
     <h1>Aktualisieren</h1>
+    <?= $msg ?>
     <?php
     // Datensatz ermitteln
     if ($tid !== 0) {
