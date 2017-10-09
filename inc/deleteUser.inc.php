@@ -17,9 +17,9 @@ if (count($_GET) > 0 &&
     }
 
     if ($resDelCat) {
-        $msg = '<p class="msg">Todo erfolgreich gelöscht</p>';
+        $msg = '<p class="success">Todo erfolgreich gelöscht</p>';
     }
     else {
-        $msg = '<p class="msg">Todo konnte nicht gelöscht werden.</p>';
+        $msg = '<p class="success">Todo konnte nicht gelöscht werden.</p>';
     }
 }
