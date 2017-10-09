@@ -9,7 +9,6 @@ if (array_key_exists('tid', $_GET) && $_GET['tid'] !== '') {
     $tid = $_GET['tid'];
 }
 
-
 ?>
 <!DOCTYPE html>
 <html lang="de">

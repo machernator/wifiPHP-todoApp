@@ -1,5 +1,6 @@
 <?php
 require_once 'inc/init.inc.php';
+require_once 'inc/deleteUser.inc.php';
 ?><!DOCTYPE html>
 <html lang="de">
 <head>
@@ -13,6 +14,7 @@ require_once 'inc/init.inc.php';
 <body>
     <p><a href="todo-new.php" class="pure-button pure-button-primary">Neues Todo</a></p>
     <h1>Todo Liste aus MySQL</h1>
+    <?= $msg ?>
     <?php
     $sql = 'SELECT text, active, datum, name, todos_id FROM todos, user where todos.user_id = user.user_id';
 
@@ -32,6 +34,7 @@ require_once 'inc/init.inc.php';
 
         // Edit Spalte
         echo '<th>edit</th>';
+        echo '<th>delete</th>';
 
         echo '</thead></tr>';
         /*
@@ -60,15 +63,17 @@ require_once 'inc/init.inc.php';
                 echo '<td>' . $value . '</td>';
             }
 
-            $link = 'todo-update.php?tid=' . $row['todos_id'];
+            $editLink = 'todo-update.php?tid=' . $row['todos_id'];
+            $deleteLink = './?tid=' . $row['todos_id'];
 
-            echo "<td><a href=\"$link\">edit</a></td>";
+            echo "<td><a href=\"$editLink\">edit</a></td>";
+            echo "<td><a href=\"$deleteLink\" class=\"delete\">delete</a></td>";
 
             echo '</tr>';
         }
         echo '</table>';
     }
     ?>
-    <!-- <button class="info">i<p class="info-text">Ein wenig Information</p></button> -->
+<script src="js/deleteLinks.js"></script>
 </body>
 </html>
