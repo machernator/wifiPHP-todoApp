@@ -46,6 +46,7 @@ if (array_key_exists('tid', $_GET) && $_GET['tid'] !== '') {
                 <?php
                 // Alle User selektieren
                 $sqlUser = "SELECT user_id, name FROM user ORDER BY name";
+                $sqlCategories = 
                 
                 // Result Set aus $sqlUser ermitteln
                 $resUser = mysqli_query($mysql, $sqlUser);
@@ -76,6 +77,51 @@ if (array_key_exists('tid', $_GET) && $_GET['tid'] !== '') {
                 else {
                     echo '<p class="msg">Es gibt keine User in der DB.</p>';
                 }
+                ?>
+
+                <p><strong>Kategorien</strong></p>
+                <?php
+                    // Array mit dem aktuellen Datensatz zugeordneten Categories
+                    $myCats = [];
+
+                    $sqlMyCats = "SELECT * FROM todos_categories WHERE todos_id = $tid";
+
+                    $resMyCats = mysqli_query($mysql, $sqlMyCats);
+
+                    if ( $resMyCats !== false && mysqli_num_rows($resMyCats) > 0 ) {
+                        // $myCats befüllen
+                        while( $row = mysqli_fetch_assoc($resMyCats) ) {
+                            $myCats[] = $row['categories_id'];
+                        }
+                    }
+
+                    // Checkboxen mit Kategorien ausgeben
+                    $sqlCat = "SELECT * FROM categories ORDER BY name";
+                    
+                    // Result Set aus $sql ermitteln
+                    $resCat = mysqli_query($mysql, $sqlCat);
+                    
+                    if ( $resCat !== false && mysqli_num_rows($resCat) > 0 ) {
+                        while( $row = mysqli_fetch_assoc($resCat) ) {
+                            $checked = '';
+                            // Prüfen, ob die aktuelle categories_id in $myCats vorkommt
+                            if (in_array($row['categories_id'], $myCats)) {
+                                $checked = ' checked';
+                            }
+
+                            echo '<label>' .
+                                 '<input type="checkbox" name="categories[]" value="' .
+                                 $row['categories_id']  .
+                                 '"' .
+                                 $checked .
+                                 '>' . 
+                                 $row['name']  .
+                                 '</label>';
+                        }
+                    }
+                    else {
+                        echo '<p class="msg">Es gibt keine Kategorien in der DB.</p>';
+                    }
                 ?>
             </form>
             <?php
