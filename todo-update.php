@@ -1,5 +1,6 @@
 <?php
 require_once 'inc/init.inc.php';
+require_once 'inc/updateUser.inc.php';
 
 // todos_id ermitteln
 $tid = 0;
@@ -7,6 +8,8 @@ if (array_key_exists('tid', $_GET) && $_GET['tid'] !== '') {
     // TODO: auf Ganzzahl prüfen
     $tid = $_GET['tid'];
 }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="de">
@@ -38,7 +41,7 @@ if (array_key_exists('tid', $_GET) && $_GET['tid'] !== '') {
             <form action="" method="post" class="pure-form pure-form-stacked" accept-charset="utf-8">
                 <!-- Damit die Id nicht verloren geht, speichern wir sie
                 in einem hidden field -->
-                <input type="hidden" name="id" id="id" value="<?= $row['todos_id'] ?>">
+                <input type="hidden" name="tid" id="tid" value="<?= $row['todos_id'] ?>">
 
                 <label for="todo">Todo</label>
                 <input type="text" name="todo" id="todo" value="<?= $row['text'] ?>">
@@ -100,7 +103,9 @@ if (array_key_exists('tid', $_GET) && $_GET['tid'] !== '') {
                     /* $sqlCat = "SELECT c.categories_id AS cid, 
                      c.name, tc.todos_id AS tid FROM categories c INNER JOIN todos_categories tc ON tc.categories_id = c.categories_id INNER JOIN todos AS t ON t.todos_id = tc.todos_id
                      ORDER BY name"; */
+                    
                     $sqlCat = "SELECT categories_id, name FROM categories ORDER BY Name";
+
                     // Result Set aus $sql ermitteln
                     $resCat = mysqli_query($mysql, $sqlCat);
                     
@@ -129,6 +134,7 @@ if (array_key_exists('tid', $_GET) && $_GET['tid'] !== '') {
                         echo '<p class="msg">Es gibt keine Kategorien in der DB.</p>';
                     }
                 ?>
+                <input type="submit" value="Senden" class="pure-button pure-button-primary">
             </form>
             <?php
             }
