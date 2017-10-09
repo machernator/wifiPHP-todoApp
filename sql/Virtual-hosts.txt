@@ -1,0 +1,24 @@
+Virtual host anlegen
+in der Apache Konfigurationsdatei 
+(entweder httpd.conf, oder, falls angelegt,
+httpd-vhosts.conf) einen Virtual Host anlegen.
+
+Beispiel:
+<VirtualHost *:80>
+  ServerName todo.dev
+  DocumentRoot "C:/wamp64/www/wifiPHP-todoApp"
+  <Directory "C:/wamp64/www/wifiPHP-todoApp/">
+    Options +Indexes +Includes +FollowSymLinks +MultiViews
+    AllowOverride All
+    Require local
+  </Directory>
+</VirtualHost>
+
+Zusätzlich muss unter
+
+C:\Windows\System32\drivers\etc\hosts
+
+der Host eingefügt werden
+
+Beispiel:
+127.0.0.1	todo.dev
