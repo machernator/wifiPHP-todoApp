@@ -27,3 +27,13 @@ CREATE VIEW customersOrders AS
         customers AS c ON c.customerNumber = o.customerNumber
     GROUP BY d.orderNumber
     ORDER BY total DESC;
+
+/* 
+    VIEW mit Subselect
+*/
+CREATE VIEW aboveAvgProducts AS
+    SELECT productCode, productName, buyPrice
+    FROM products
+    WHERE buyPrice >
+    ( SELECT AVG(buyPrice) FROM products )
+    ORDER BY buyPrice DESC;
