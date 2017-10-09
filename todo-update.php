@@ -82,7 +82,7 @@ if (array_key_exists('tid', $_GET) && $_GET['tid'] !== '') {
                 <p><strong>Kategorien</strong></p>
                 <?php
                     // Array mit dem aktuellen Datensatz zugeordneten Categories
-                    $myCats = [];
+                    /* $myCats = [];
 
                     $sqlMyCats = "SELECT * FROM todos_categories WHERE todos_id = $tid";
 
@@ -93,10 +93,10 @@ if (array_key_exists('tid', $_GET) && $_GET['tid'] !== '') {
                         while( $row = mysqli_fetch_assoc($resMyCats) ) {
                             $myCats[] = $row['categories_id'];
                         }
-                    }
+                    } */
 
                     // Checkboxen mit Kategorien ausgeben
-                    $sqlCat = "SELECT * FROM categories ORDER BY name";
+                    $sqlCat = "SELECT c.categories_id AS cid, c.name, tc.todos_id AS tid FROM categories c INNER JOIN todos_categories tc ON tc.categories_id = c.categories_id INNER JOIN todos AS t ON t.todos_id = tc.todos_id ORDER BY name";
                     
                     // Result Set aus $sql ermitteln
                     $resCat = mysqli_query($mysql, $sqlCat);
@@ -105,13 +105,16 @@ if (array_key_exists('tid', $_GET) && $_GET['tid'] !== '') {
                         while( $row = mysqli_fetch_assoc($resCat) ) {
                             $checked = '';
                             // Prüfen, ob die aktuelle categories_id in $myCats vorkommt
-                            if (in_array($row['categories_id'], $myCats)) {
+                            /* if (in_array($row['cid'], $myCats)) {
+                                $checked = ' checked';
+                            } */
+                            if ($tid == $row['tid']) {
                                 $checked = ' checked';
                             }
 
                             echo '<label>' .
                                  '<input type="checkbox" name="categories[]" value="' .
-                                 $row['categories_id']  .
+                                 $row['name']  .
                                  '"' .
                                  $checked .
                                  '>' . 
