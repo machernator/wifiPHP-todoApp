@@ -17,7 +17,7 @@ require_once 'inc/checkTodo.inc.php'
     <h1>Todo Liste aus MySQL</h1>
     <?= $msg ?>
     <?php
-    $sql = 'SELECT text, active, name, todos_id FROM todos, user where todos.user_id = user.user_id ORDER BY name';
+    $sql = 'SELECT text, active, name, todos_id FROM todos, user where todos.user_id = user.user_id ORDER BY active DESC, name';
 
     // Result Set aus $sql ermitteln
     $res = mysqli_query($mysql, $sql);
@@ -55,7 +55,14 @@ require_once 'inc/checkTodo.inc.php'
 
         */
         while( $row = mysqli_fetch_assoc($res) ) {
-            echo '<tr>';
+            // inaktive markieren
+            $style = '';
+
+            if($row['active'] == 0) {
+                $style = 'style="text-decoration: line-through"';
+            }
+
+            echo "<tr $style>";
             echo '<td>' . $row['text'] . '</td>';
             echo '<td>' . $row['name'] . '</td>';               
            
