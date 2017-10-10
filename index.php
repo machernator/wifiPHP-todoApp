@@ -22,7 +22,7 @@ require_once 'inc/deleteUser.inc.php';
     $res = mysqli_query($mysql, $sql);
 
     // Unser Resultat liefert mindestens eine Zeile
-    if ( mysqli_num_rows($res) > 0 ) {
+    if ( $res && mysqli_num_rows($res) > 0 ) {
         echo '<table class="pure-table pure-table-bordered">';
         echo '<tr><thead>';
 
