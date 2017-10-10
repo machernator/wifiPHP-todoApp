@@ -66,14 +66,14 @@ require_once 'inc/checkTodo.inc.php'
             echo '<td>' . $row['text'] . '</td>';
             echo '<td>' . $row['name'] . '</td>';               
            
-            /*  Automatisch: 
+            /*  Automatisches auslesen: 
             foreach ($row as $value) {
                 echo '<td>' . $value . '</td>';
             } */
-
             
             $editLink = 'todo-update.php?tid=' . $row['todos_id'];
             $deleteLink = './?tid=' . $row['todos_id'];
+            // benötigt andere variable, um sich von delete zu unterscheiden.
             $doneLink = './?doneid=' . $row['todos_id'];
             
             echo '<td><a href="./' . $doneLink . '">OK</a></td>';
