@@ -1,6 +1,7 @@
 <?php
 require_once 'inc/init.inc.php';
 require_once 'inc/deleteUser.inc.php';
+require_once 'inc/checkTodo.inc.php'
 ?><!DOCTYPE html>
 <html lang="de">
 <head>
@@ -16,7 +17,7 @@ require_once 'inc/deleteUser.inc.php';
     <h1>Todo Liste aus MySQL</h1>
     <?= $msg ?>
     <?php
-    $sql = 'SELECT text, active, datum, name, todos_id FROM todos, user where todos.user_id = user.user_id';
+    $sql = 'SELECT text, active, name, todos_id FROM todos, user where todos.user_id = user.user_id ORDER BY name';
 
     // Result Set aus $sql ermitteln
     $res = mysqli_query($mysql, $sql);
@@ -27,10 +28,13 @@ require_once 'inc/deleteUser.inc.php';
         echo '<tr><thead>';
 
         // automatische Auslesen der Tabellenköpfe
-        for($i = 0; $i < mysqli_num_fields($res); $i++) {
+       /*  for($i = 0; $i < mysqli_num_fields($res); $i++) {
             $field_info = mysqli_fetch_field($res);
             echo "<th>{$field_info->name}</th>";
-        }
+        } */
+        echo "<th>Text</th>";
+        echo "<th>User</th>";
+        echo "<th>Done</th>";
 
         // Edit Spalte
         echo '<th>edit</th>';
@@ -52,20 +56,20 @@ require_once 'inc/deleteUser.inc.php';
         */
         while( $row = mysqli_fetch_assoc($res) ) {
             echo '<tr>';
-            /*  Alternativ:
-                echo '<td>' . $row['todos_id'] . '</td>';
-                echo '<td>' . $row['user_id'] . '</td>';
-                echo '<td>' . $row['datum'] . '</td>';
-                echo '<td>' . $row['text'] . '</td>';
-                echo '<td>' . $row['active'] . '</td>';
-            */
+            echo '<td>' . $row['text'] . '</td>';
+            echo '<td>' . $row['name'] . '</td>';               
+           
+            /*  Automatisch: 
             foreach ($row as $value) {
                 echo '<td>' . $value . '</td>';
-            }
+            } */
 
+            
             $editLink = 'todo-update.php?tid=' . $row['todos_id'];
             $deleteLink = './?tid=' . $row['todos_id'];
-
+            $doneLink = './?doneid=' . $row['todos_id'];
+            
+            echo '<td><a href="./' . $doneLink . '">OK</a></td>';
             echo "<td><a href=\"$editLink\">edit</a></td>";
             echo "<td><a href=\"$deleteLink\" class=\"delete\">delete</a></td>";
 
